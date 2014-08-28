@@ -13,11 +13,8 @@ namespace DatabaseHelper
     /// The class provides a modular interface to a database.
     /// 
     /// Inherently, the following modules are supported:
-    /// - Simulation:
-    ///     
-    ///     A simulated database used for testing. No data is stored.
-    ///     
-    /// - MicrosoftSQLServer:
+    /// - Simulation: Test environment with no memory.
+    /// - MicrosoftSQLServer: Microsoft SQL Server.
     /// 
     /// </summary>
     public class DBHelper
@@ -60,7 +57,7 @@ namespace DatabaseHelper
         /// <summary>
         /// Defines a new Database Helper.
         /// </summary>
-        /// <param name="type">DatabaseType: The type of the underlying database.</param>
+        /// <param name="type">The type of the underlying database.</param>
         public DBHelper(DatabaseType type)
         {
             setDBType(type);
@@ -74,8 +71,37 @@ namespace DatabaseHelper
         {
             setDBModule(module);
         }
-        #endregion
 
+        /// <summary>
+        /// Defines a new Database Helper with a preconstructed module and immediate sets up login information.
+        /// </summary>
+        /// <param name="type">The type of the underlying database</param>
+        /// <param name="username">The id of the user.</param>
+        /// <param name="password">The password to the database.</param>
+        /// <param name="databasename">The name of the database.</param>
+        /// <param name="serverURL">The url of the server hosting the database.</param>
+        public DBHelper(DatabaseType type, string username, string password, string databasename, string serverURL)
+            : this(type)
+        {
+            SetLoginInformation(username, password, databasename, serverURL);
+        }
+
+        /// <summary>
+        /// Defines a new Database Helper with a user-defined module and immediate sets up login information.
+        /// </summary>
+        /// <param name="type">The type of the underlying database</param>
+        /// <param name="username">The id of the user.</param>
+        /// <param name="password">The password to the database.</param>
+        /// <param name="databasename">The name of the database.</param>
+        /// <param name="serverURL">The url of the server hosting the database.</param>
+        public DBHelper(IDatabaseModule module, string username, string password, string databasename, string serverURL)
+            : this(module)
+        {
+            SetLoginInformation(username, password, databasename, serverURL);
+        }
+
+        #endregion
+        
         #region Public_Methods
 
         /// <summary>
