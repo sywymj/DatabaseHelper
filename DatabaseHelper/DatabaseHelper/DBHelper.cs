@@ -5,16 +5,56 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using DatabaseHelper.Modules;
+using DatabaseHelper.Exceptions;
 
 namespace DatabaseHelper
 {
     /// <summary>
-    /// The class provides an interface to a database, along with a simulation framework for testing.
+    /// The class provides a modular interface to a database.
+    /// 
+    /// Inherently, the following modules are supported:
+    /// - Simulation:
+    ///     
+    ///     A simulated database used for testing. No data is stored.
+    ///     
+    /// - MicrosoftSQLServer:
+    /// 
     /// </summary>
     public class DBHelper
     {
+        #region Fields
+        
+        /// <summary>
+        /// Defines the type of the database.
+        /// </summary>
         private DatabaseType databaseType;
+
+        /// <summary>
+        /// Defines the currently active module.
+        /// </summary>
         private IDatabaseModule module;
+
+        /// <summary>
+        /// Defines username for the user who is accessing the database.
+        /// </summary>
+        internal string UserName;
+
+        /// <summary>
+        /// Defines password for the user who is accessing the database.
+        /// </summary>
+        internal string Password;
+
+        /// <summary>
+        /// Defines the name of the database.
+        /// </summary>
+        internal string DatabaseName;
+
+        /// <summary>
+        /// Defines the URL of the server hosting the database.
+        /// </summary>
+        internal string ServerURL;
+
+        #endregion
 
         #region Constructors
         /// <summary>
@@ -24,6 +64,15 @@ namespace DatabaseHelper
         public DBHelper(DatabaseType type)
         {
             setDBType(type);
+        }
+
+        /// <summary>
+        /// Defines a new database helper with a user-defined module.
+        /// </summary>
+        /// <param name="module">The desired module.</param>
+        public DBHelper(IDatabaseModule module)
+        {
+            setDBModule(module);
         }
         #endregion
 
@@ -39,12 +88,22 @@ namespace DatabaseHelper
             switch (type)
             {
                 case DatabaseType.MicrosoftSQLServer:
-                    module = new MicrosoftSQLServerModule();
+                    module = new MicrosoftSQLServerModule(this);
                     break;
                 case DatabaseType.Simulation:
                     module = new SimulationModule();
                     break;
             }
+        }
+
+        /// <summary>
+        /// Sets the module to a user-defined module.
+        /// </summary>
+        /// <param name="module">The desired module.</param>
+        public void setDBModule(IDatabaseModule module)
+        {
+            databaseType = DatabaseType.SelfDefined;
+            this.module = module;
         }
 
         /// <summary>
@@ -54,39 +113,24 @@ namespace DatabaseHelper
         /// <returns>Object: The result of the query.</returns>
         public Object executeQuery(Query query)
         {
-            module.executeQuery(query);            
-            return null;
+            if (UserName == null) throw new DatabaseException("User undefined. Please use SetLoginInformation to log in.");
+            return module.executeQuery(query);
         }
 
-           
-
-        
-
-        #endregion
-
-        //TODO: Manage this properly:
-        #region Private_Utility_Methods
-
-        private string getDB()
+        /// <summary>
+        /// Sets username, password, servername, and server url for the database.
+        /// </summary>
+        /// <param name="username">The id of the user.</param>
+        /// <param name="password">The password to the database.</param>
+        /// <param name="databasename">The name of the database.</param>
+        /// <param name="serverURL">The url of the server hosting the database.</param>
+        public void SetLoginInformation(string username, string password, string databasename, string serverURL)
         {
-            return @"server=localhost;userid=Michael;
-            password=Cant0r;database=vinguide";
+            UserName = username;
+            Password = password;
+            DatabaseName = databasename;
+            ServerURL = serverURL;
         }
-
-        private object executeQuery(SqlCommand q)
-        {
-            throw new NotImplementedException();
-        }
-
-        private object simulateQuery(Query query)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Private_Connection_Methods
-
 
         #endregion
     }

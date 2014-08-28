@@ -62,7 +62,7 @@ namespace DatabaseHelper
         /// <param name="value">The value to be set.</param>
         public void addIntParameter(string name, int value)
         {
-            Parameters.Add(new Parameter(name, value, ParameterType.Integer));
+            Parameters.Add(new Parameter(name, value, DataType.Integer));
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace DatabaseHelper
         /// <param name="value">The value to be set.</param>
         public void addTextParameter(string name, string value)
         {
-            Parameters.Add(new Parameter(name, value, ParameterType.Text));
+            Parameters.Add(new Parameter(name, value, DataType.Text));
         }
         #endregion
 
