@@ -80,6 +80,16 @@ namespace DatabaseHelper
         {
             Parameters.Add(new Parameter(name, value, DataType.Text));
         }
+
+        /// <summary>
+        /// Generates and adds a DateTime parameter based on column name and value.
+        /// </summary>
+        /// <param name="column">The name of the parameter.</param>
+        /// <param name="value">The value to be set.</param>
+        public void addDateTimeParameter(string name, DateTime value)
+        {
+            Parameters.Add(new Parameter(name, value, DataType.DateTime));
+        }
         #endregion
 
         #region Utility
@@ -118,5 +128,7 @@ namespace DatabaseHelper
         }
 
         #endregion
+
+
     }
 }

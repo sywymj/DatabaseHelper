@@ -94,6 +94,16 @@ namespace DatabaseHelper
         {
             return System.Convert.ToInt32(Lookup(name));
         }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a DateTime.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public DateTime ReadDateTime(string name)
+        {
+            return System.Convert.ToDateTime(Lookup(name));
+        }
         #endregion
 
         #region Private_Service_Methods

@@ -6,7 +6,10 @@
     public enum DataType
     {
         Integer = 0,
-        Text = 1
+        Text = 1,
+        DateTime = 2
+
+        //To add a datatype: Include it here, in Parameter.cs, in Query.cs, and in SqlResult.cs.
     }
 
     /// <summary>

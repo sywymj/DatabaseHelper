@@ -51,6 +51,8 @@ namespace DatabaseHelper
                     return System.Data.SqlDbType.Int;
                 case DataType.Text:
                     return System.Data.SqlDbType.Text;
+                case DataType.DateTime:
+                    return System.Data.SqlDbType.DateTime;
             }
             
             throw new Exception("Wrongful parametrization.");
