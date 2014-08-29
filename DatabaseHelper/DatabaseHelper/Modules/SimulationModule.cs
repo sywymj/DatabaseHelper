@@ -1,12 +1,13 @@
-﻿using DatabaseHelper.Model;
+﻿using DatabaseHelper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
 namespace DatabaseHelper.Modules
 {
-    class SimulationModule : IDatabaseModule
+    internal class SimulationModule : IDatabaseModule
     {
         public SqlResult executeQuery(Query query){
             throw new NotImplementedException();

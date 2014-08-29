@@ -1,6 +1,7 @@
-﻿using DatabaseHelper.Model;
+﻿using DatabaseHelper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -27,28 +28,32 @@ namespace DatabaseHelper.Modules
         /// Inherited method. Executes an SQL Query.
         /// </summary>
         /// <param name="query">The query to be executed.</param>
-        /// <returns>The result on an SqlResult format.</returns>
+        /// <returns>The result on a DataTable format.</returns>
         public SqlResult executeQuery(Query query){
             //Open a connection:
-            SqlConnection sqlConnection1 = new SqlConnection("user id="+DbHelper.UserName+";" +
+            SqlConnection con = new SqlConnection("user id="+DbHelper.UserName+";" +
                                        "password="+DbHelper.Password+
                                         ";server="+DbHelper.ServerURL+";" +
                                        "Trusted_Connection=yes;" +
                                        "database="+DbHelper.DatabaseName+"; " +
                                        "connection timeout=30");
-            sqlConnection1.Open();
+            con.Open();
 
             //Convert the query:
             SqlCommand cmd = query.getSqlCommand();
+            cmd.Connection = con;
 
             //Execute the query:
             SqlDataReader reader = cmd.ExecuteReader();
             
+            //Build the result:
+            SqlResult result = new SqlResult(reader);
+
             //Close the connection:
-            sqlConnection1.Close();
+            con.Close();
 
             //Return the result:
-            return new SqlResult(reader);
+            return result;
         }
         #endregion
     }

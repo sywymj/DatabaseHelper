@@ -46,8 +46,9 @@
     <Compile Include="DatabaseEnums.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="Exceptions\DatabaseException.cs" />
+    <Compile Include="Exceptions\LookupException.cs" />
     <Compile Include="IDatabaseModule.cs" />
-    <Compile Include="Model\SqlResult.cs" />
+    <Compile Include="SqlResult.cs" />
     <Compile Include="Modules\MicrosoftSQLServerModule.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

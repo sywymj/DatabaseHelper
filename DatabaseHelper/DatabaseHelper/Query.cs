@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseHelper.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -8,11 +9,17 @@ namespace DatabaseHelper
 {
     public class Query
     {
-        //The text of the query:
+        #region Fields
+        /// <summary>
+        /// The text of the query.
+        /// </summary>
         public string Text { get; set; }
 
-        //Eventual parameters:
+        /// <summary>
+        /// Contains any eventual parameters.
+        /// </summary>
         protected List<Parameter> Parameters { get; set; }
+        #endregion
 
         #region Constructors
         /// <summary>
@@ -38,9 +45,8 @@ namespace DatabaseHelper
         /// </summary>
         /// <param name="m">The text of the query.</param>
         /// <param name="paramlist">A list of parameters.</param>
-        public Query(string m, List<Parameter> paramlist)
+        public Query(string m, List<Parameter> paramlist) : this(m)
         {
-            Text = m;
             Parameters = paramlist;
         }
         #endregion
@@ -97,6 +103,7 @@ namespace DatabaseHelper
             //Create SQL command:
             SqlCommand query = new SqlCommand(Text);
 
+           
             //Apply parameters:
             foreach (Parameter parameter in Parameters)
             {

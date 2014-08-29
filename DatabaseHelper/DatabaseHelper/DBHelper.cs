@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using DatabaseHelper.Modules;
 using DatabaseHelper.Exceptions;
+using System.Data;
 
 namespace DatabaseHelper
 {
@@ -137,7 +138,7 @@ namespace DatabaseHelper
         /// </summary>
         /// <param name="query">Query: The query to be executed.</param>
         /// <returns>Object: The result of the query.</returns>
-        public Object executeQuery(Query query)
+        public SqlResult executeQuery(Query query)
         {
             if (UserName == null) throw new DatabaseException("User undefined. Please use SetLoginInformation to log in.");
             return module.executeQuery(query);
