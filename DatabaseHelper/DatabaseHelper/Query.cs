@@ -52,6 +52,7 @@ namespace DatabaseHelper
         #endregion
 
         #region Parametrization
+
         /// <summary>
         /// Adds an already defined parameter to the query.
         /// </summary>
@@ -68,19 +69,70 @@ namespace DatabaseHelper
         /// <param name="value">The value to be set.</param>
         public void addIntParameter(string name, int value)
         {
-            Parameters.Add(new Parameter(name, value, DataType.Integer));
+            Parameters.Add(new Parameter(name, value, DataType.Int32));
         }
 
         /// <summary>
-        /// Generates and adds a text parameter based on column name and value.
+        /// Generates and adds a decimal parameter based on column name and value.
         /// </summary>
         /// <param name="column">The name of the parameter.</param>
         /// <param name="value">The value to be set.</param>
-        public void addTextParameter(string name, string value)
+        public void addDecimalParameter(string name, decimal value)
         {
-            Parameters.Add(new Parameter(name, value, DataType.Text));
+            Parameters.Add(new Parameter(name, value, DataType.Decimal));
         }
 
+        /// <summary>
+        /// Generates and adds a real parameter based on column name and value.
+        /// </summary>
+        /// <param name="column">The name of the parameter.</param>
+        /// <param name="value">The value to be set.</param>
+        public void addRealParameter(string name, double value)
+        {
+            Parameters.Add(new Parameter(name, value, DataType.Real));
+        }
+
+        /// <summary>
+        /// Generates and adds a float parameter based on column name and value.
+        /// </summary>
+        /// <param name="column">The name of the parameter.</param>
+        /// <param name="value">The value to be set.</param>
+        public void addFloatParameter(string name, double value)
+        {
+            Parameters.Add(new Parameter(name, value, DataType.Float));
+        }
+
+        
+        /// <summary>
+        /// Generates and adds a variable-length char array parameter based on column name and value.
+        /// </summary>
+        /// <param name="column">The name of the parameter.</param>
+        /// <param name="value">The value to be set.</param>
+        public void addVarCharParameter(string name, string value)
+        {
+            Parameters.Add(new Parameter(name, value, DataType.VarChar));
+        }
+
+        /// <summary>
+        /// Generates and adds a boolean parameter based on column name and value.
+        /// </summary>
+        /// <param name="column">The name of the parameter.</param>
+        /// <param name="value">The value to be set.</param>
+        public void addBooleanParameter(string name, bool value)
+        {
+            Parameters.Add(new Parameter(name, (value? 1: 0), DataType.Boolean));
+        }
+
+        /// <summary>
+        /// Generates and adds a fixed-length char array parameter based on column name and value.
+        /// </summary>
+        /// <param name="column">The name of the parameter.</param>
+        /// <param name="value">The value to be set.</param>
+        public void addFixedCharParameter(string name, string value)
+        {
+            Parameters.Add(new Parameter(name, value, DataType.FixedChar));
+        }
+        
         /// <summary>
         /// Generates and adds a DateTime parameter based on column name and value.
         /// </summary>

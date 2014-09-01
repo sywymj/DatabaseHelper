@@ -99,36 +99,6 @@ namespace DatabaseHandlerTest
         }
 
         [TestMethod]
-        public void TestStringParametrization()
-        {
-            DBHelper dbHelper = new DBHelper(DatabaseType.MicrosoftSQLServer);
-            SetupTestDatabaseForMSSQL(dbHelper);
-
-            Query q = new Query("INSERT INTO test_table (ID, Description) " +
-                                "VALUES (1, 'ettal')");
-            SqlResult result = dbHelper.executeQuery(q);
-            Assert.IsNotNull(result);
-
-            Query q2 = new Query("SELECT ID " +
-                                    "FROM test_table " +
-                                    "WHERE Description LIKE @description");
-            q2.addTextParameter("description", "ettal");
-            result = dbHelper.executeQuery(q2);
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.DataRemaining());
-
-            result.NextRow();
-            var intResult = result.ReadInt("ID");
-            Assert.AreEqual(1, intResult);
-
-            Query q3 = new Query("DELETE FROM test_table  " +
-                                "WHERE ID=1");
-            result = dbHelper.executeQuery(q3);
-            Assert.IsNotNull(result);
-        }
-
-
-        [TestMethod]
         public void TestDateTime()
         {
             DBHelper dbHelper = new DBHelper(DatabaseType.MicrosoftSQLServer);

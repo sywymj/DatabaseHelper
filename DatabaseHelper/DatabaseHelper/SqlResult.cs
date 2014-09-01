@@ -86,13 +86,83 @@ namespace DatabaseHelper
         }
 
         /// <summary>
-        /// Reads from column with a specified name and returns the result as an integer.
+        /// Reads from column with a specified name and returns the result as a boolean.
         /// </summary>
         /// <param name="name">The name of the column.</param>
         /// <returns>The contents of the cell.</returns>
-        public int ReadInt(string name)
+        public bool ReadBoolean(string name)
+        {
+            return System.Convert.ToBoolean(Lookup(name));
+        }
+        
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a character.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public char ReadChar(string name)
+        {
+            return System.Convert.ToChar(Lookup(name));
+        }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a 16-bit integer.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public short ReadInt16(string name)
+        {
+            return System.Convert.ToInt16(Lookup(name));
+        }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a 32-bit integer.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public int ReadInt32(string name)
         {
             return System.Convert.ToInt32(Lookup(name));
+        }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a 64-bit integer.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public long ReadInt64(string name)
+        {
+            return System.Convert.ToInt64(Lookup(name));
+        }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a decimal.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public decimal ReadDecimal(string name)
+        {
+            return System.Convert.ToDecimal(Lookup(name));
+        }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a single.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public Single ReadSingle(string name)
+        {
+            return System.Convert.ToSingle(Lookup(name));
+        }
+
+        /// <summary>
+        /// Reads from column with a specified name and returns the result as a double.
+        /// </summary>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The contents of the cell.</returns>
+        public double ReadDouble(string name)
+        {
+            return System.Convert.ToDouble(Lookup(name));
         }
 
         /// <summary>
@@ -104,15 +174,13 @@ namespace DatabaseHelper
         {
             return System.Convert.ToDateTime(Lookup(name));
         }
-        #endregion
 
-        #region Private_Service_Methods
         /// <summary>
         /// Performs a lookup in the associated datatable, checking for errors meanwhile.
         /// </summary>
         /// <param name="columnName">The name of the column to be retrieved.</param>
         /// <returns>The contents of the cell.</returns>
-        private object Lookup(string columnName)
+        public object Lookup(string name)
         {
             if (RowPointer < 0)
             {
@@ -122,13 +190,14 @@ namespace DatabaseHelper
             {
                 throw new LookupException("No rows remain in the result.");
             }
-            else if (!Table.Columns.Contains(columnName))
+            else if (!Table.Columns.Contains(name))
             {
-                throw new LookupException("The table contains no column with the name '"+columnName+"'.");
+                throw new LookupException("The table contains no column with the name '" + name + "'.");
             }
 
-            return Table.Rows[RowPointer][columnName];
+            return Table.Rows[RowPointer][name];
         }
         #endregion
+
     }
 }

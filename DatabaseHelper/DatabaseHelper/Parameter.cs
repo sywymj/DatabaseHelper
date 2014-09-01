@@ -43,16 +43,72 @@ namespace DatabaseHelper
         /// <summary>
         /// Service method for MicrosoftSQL that defines type:
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The corresponding SqlDbType</returns>
         internal System.Data.SqlDbType getParameterType()
         {
             switch (parameterType){
-                case DataType.Integer:
+                case DataType.Int32:
                     return System.Data.SqlDbType.Int;
                 case DataType.Text:
                     return System.Data.SqlDbType.Text;
                 case DataType.DateTime:
                     return System.Data.SqlDbType.DateTime;
+                case DataType.VarChar:
+                    return System.Data.SqlDbType.VarChar;
+                case DataType.FixedChar:
+                    return System.Data.SqlDbType.Char;
+                case DataType.Boolean:
+                    return System.Data.SqlDbType.Bit;
+                case DataType.Byte:
+                    return System.Data.SqlDbType.TinyInt;
+                case DataType.Int64:
+                    return System.Data.SqlDbType.BigInt;
+                case DataType.FixedBinary:
+                    return System.Data.SqlDbType.Binary;
+                case DataType.Date:
+                    return System.Data.SqlDbType.Date;
+                case DataType.DateTime2:
+                    return System.Data.SqlDbType.DateTime2;
+                case DataType.DateTimeOffSet:
+                    return System.Data.SqlDbType.DateTimeOffset;
+                case DataType.Decimal:
+                    return System.Data.SqlDbType.Decimal;
+                case DataType.Float:
+                    return System.Data.SqlDbType.Float;
+                case DataType.Image:
+                    return System.Data.SqlDbType.Image;
+                case DataType.Money:
+                    return System.Data.SqlDbType.Money;
+                case DataType.NFixedChar:
+                    return System.Data.SqlDbType.NChar;
+                case DataType.NText:
+                    return System.Data.SqlDbType.NText;
+                case DataType.NVarChar:
+                    return System.Data.SqlDbType.NVarChar;
+                case DataType.Real:
+                    return System.Data.SqlDbType.Real;
+                case DataType.SmallDateTime:
+                    return System.Data.SqlDbType.SmallDateTime;
+                case DataType.Int16:
+                    return System.Data.SqlDbType.SmallInt;
+                case DataType.SmallMoney:
+                    return System.Data.SqlDbType.SmallMoney;
+                case DataType.Structured:
+                    return System.Data.SqlDbType.Structured;
+                case DataType.Time:
+                    return System.Data.SqlDbType.Time;
+                case DataType.Timestamp:
+                    return System.Data.SqlDbType.Timestamp;
+                case DataType.Udt:
+                    return System.Data.SqlDbType.Udt;
+                case DataType.UniqueIdentifier:
+                    return System.Data.SqlDbType.UniqueIdentifier;
+                case DataType.VarBinary:
+                    return System.Data.SqlDbType.VarBinary;
+                case DataType.Variant:
+                    return System.Data.SqlDbType.Variant;
+                case DataType.XML: 
+                    return System.Data.SqlDbType.Xml;
             }
             
             throw new Exception("Wrongful parametrization.");
